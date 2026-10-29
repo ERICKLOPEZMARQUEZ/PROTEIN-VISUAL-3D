@@ -1,0 +1,168 @@
+{
+  "tools": [
+    {
+      "id": "pdb_search",
+      "name": "Search PDB",
+      "description": "Search the RCSB Protein Data Bank using attribute-based, sequence similarity, structure similarity, or full-text queries.",
+      "category": "structural_biology",
+      "connector": "pdb_api",
+      "parameters": {
+        "query": {
+          "type": "object",
+          "description": "PDB search query in RCSB Search API JSON format.",
+          "required": true
+        },
+        "return_type": {
+          "type": "string",
+          "description": "Type of results to return: entry, polymer_entity, assembly, mol_definition.",
+          "enum": ["entry", "polymer_entity", "assembly", "mol_definition"],
+          "default": "entry"
+        },
+        "rows": {
+          "type": "integer",
+          "description": "Maximum number of results to return.",
+          "default": 25
+        },
+        "sort_by": {
+          "type": "string",
+          "description": "Attribute to sort results by."
+        },
+        "sort_direction": {
+          "type": "string",
+          "enum": ["asc", "desc"],
+          "default": "desc"
+        }
+      }
+    },
+    {
+      "id": "pdb_fetch_metadata",
+      "name": "Fetch PDB Metadata",
+      "description": "Query PDB metadata using GraphQL. Efficiently retrieves titles, resolution, organism, citations, and more without downloading full coordinate files.",
+      "category": "structural_biology",
+      "connector": "pdb_api",
+      "parameters": {
+        "graphql_query": {
+          "type": "string",
+          "description": "GraphQL query string for the RCSB Data API.",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "pdb_download_structure",
+      "name": "Download PDB Structure",
+      "description": "Download coordinate files (mmCIF or PDB format) for specified PDB entries.",
+      "category": "structural_biology",
+      "connector": "pdb_api",
+      "parameters": {
+        "pdb_ids": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of PDB IDs to download.",
+          "required": true
+        },
+        "format": {
+          "type": "string",
+          "enum": ["mmcif", "pdb"],
+          "default": "mmcif"
+        }
+      }
+    },
+    {
+      "id": "pdb_fetch_schema",
+      "name": "Fetch PDB Schema",
+      "description": "Retrieve the searchable attribute schema for PDB search or data APIs.",
+      "category": "structural_biology",
+      "connector": "pdb_api",
+      "parameters": {
+        "api": {
+          "type": "string",
+          "enum": ["search_structure", "search_chemical", "data_entry", "data_polymer_entity"],
+          "description": "Which schema to fetch.",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "alphafold_fetch_structure",
+      "name": "Fetch AlphaFold Structure",
+      "description": "Download AlphaFold predicted structure (mmCIF), PAE matrix, and metadata for a UniProt accession.",
+      "category": "structural_biology",
+      "connector": "alphafold_api",
+      "parameters": {
+        "uniprot_id": {
+          "type": "string",
+          "description": "UniProt accession ID (e.g., P04637).",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "alphafold_analyze_plddt",
+      "name": "Analyze pLDDT Confidence",
+      "description": "Analyze per-residue pLDDT confidence scores from an AlphaFold prediction. Reports overall confidence, disordered regions, and structural assessment.",
+      "category": "structural_biology",
+      "connector": "alphafold_api",
+      "parameters": {
+        "metadata_path": {
+          "type": "string",
+          "description": "Path to the AlphaFold metadata JSON file.",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "alphafold_analyze_pae",
+      "name": "Analyze PAE Domains",
+      "description": "Analyze Predicted Aligned Error matrix to detect rigid domain boundaries and inter-domain flexibility.",
+      "category": "structural_biology",
+      "connector": "alphafold_api",
+      "parameters": {
+        "pae_json_path": {
+          "type": "string",
+          "description": "Path to the PAE JSON file.",
+          "required": true
+        }
+      }
+    },
+    {
+      "id": "science_canvas_render",
+      "name": "Render in Science Canvas",
+      "description": "Push a 3D molecular structure to the Science Canvas sidecar for interactive visualization.",
+      "category": "visualization",
+      "connector": "science_canvas",
+      "parameters": {
+        "source": {
+          "type": "string",
+          "enum": ["pdb", "alphafold", "file"],
+          "description": "Source of the structure.",
+          "required": true
+        },
+        "identifier": {
+          "type": "string",
+          "description": "PDB ID, UniProt ID, or file path.",
+          "required": true
+        },
+        "style": {
+          "type": "string",
+          "enum": ["cartoon", "ball_and_stick", "surface", "ribbon", "spacefill"],
+          "default": "cartoon"
+        },
+        "color_scheme": {
+          "type": "string",
+          "enum": ["chain", "element", "plddt", "secondary_structure", "bfactor", "residue_type"],
+          "default": "chain"
+        },
+        "highlight_residues": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Residue selections to highlight (e.g., ['A:123-145', 'B:200'])."
+        },
+        "show_ligands": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  ]
+}

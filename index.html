@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDB Viewer</title>
+    <meta name="description" content="Interactive 3D protein structure viewer powered by RCSB PDB, AlphaFold DB, and Mol* with structural biology AI agent intelligence." />
+    <meta property="og:title" content="PDB Viewer" />
+    <meta property="og:description" content="Interactive 3D protein structure viewer powered by RCSB PDB, AlphaFold DB, and Mol* with structural biology AI agent intelligence." />
+    <link rel="icon" type="image/jpeg" href="/src/assets/images/protein_app_logo_1790042494041.jpg" />
+    <!-- Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- 3Dmol.js for high performance client-side WebGL protein rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.4.2/3Dmol-min.js"></script>
+    <script>
+      (function() {
+        function register3DmolSchemes() {
+          if (window.$3Dmol && window.$3Dmol.colorschemes) {
+            window.$3Dmol.colorschemes.element = window.$3Dmol.colorschemes.default || window.$3Dmol.colorschemes.Jmol || { prop: 'elem' };
+            window.$3Dmol.colorschemes.charge = { prop: 'charge', gradient: 'rwb', min: -1, max: 1 };
+            window.$3Dmol.colorschemes.plddt = { prop: 'b', gradient: 'roygb', min: 40, max: 100 };
+            window.$3Dmol.colorschemes.hydrophobicity = { prop: 'hydrophobicity', gradient: 'sinebow', min: 0, max: 100 };
+          }
+        }
+        register3DmolSchemes();
+        window.addEventListener('DOMContentLoaded', register3DmolSchemes);
+      })();
+    </script>
+  </head>
+  <body class="bg-[#F3F6F4] text-[#111A14] antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

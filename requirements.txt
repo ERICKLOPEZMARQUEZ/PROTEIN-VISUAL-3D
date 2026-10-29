@@ -1,0 +1,4 @@
+requests>=2.31.0
+biopython>=1.83
+gemmi>=0.6.5
+numpy>=1.26.0

@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  --sg-page: #F3F6F4;
+  --sg-surface: #FFFFFF;
+  --sg-surface-hover: #F8FAF8;
+  --sg-surface-active: #EFF3F0;
+  --sg-surface-sunken: #EBF0EC;
+  --sg-border: #D4DCD6;
+  --sg-border-subtle: #E5ECE7;
+  --sg-border-strong: #BAC7BE;
+  --sg-text-primary: #111A14;
+  --sg-text-secondary: #4D5C52;
+  --sg-text-tertiary: #7D8E82;
+  --sg-text-inverse: #FFFFFF;
+  --sg-accent: #059669;
+  --sg-accent-hover: #047857;
+  --sg-accent-active: #065F46;
+  --sg-accent-subtle: #ECFDF5;
+  --sg-success: #10B981;
+  --sg-success-subtle: #F0FDF4;
+  --sg-warning: #D97706;
+  --sg-warning-subtle: #FFFBEB;
+  --sg-error: #DC2626;
+  --sg-error-subtle: #FEF2F2;
+  --sg-info: #0D9488;
+  --sg-info-subtle: #F0FDFA;
+  --sg-shadow-sm: 0 1px 2px rgba(17, 26, 20, 0.05);
+  --sg-shadow-md: 0 2px 8px rgba(17, 26, 20, 0.07);
+  --sg-shadow-lg: 0 4px 16px rgba(17, 26, 20, 0.09);
+
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--sg-text-primary);
+  background-color: var(--sg-page);
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+}
+
+/* Custom scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--sg-surface-sunken);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sg-border-strong);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sg-text-tertiary);
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #F0F0ED 25%, #FAFAF8 50%, #F0F0ED 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease infinite;
+}
+
+/* Pulsing 8px accent dot */
+@keyframes pulse-accent {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-accent 1.2s ease infinite;
+}
+
+/* Inline 16px spinner */
+@keyframes spin-linear {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner-16 {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--sg-border-strong);
+  border-top-color: var(--sg-accent);
+  border-radius: 50%;
+  animation: spin-linear 600ms linear infinite;
+}
+
+/* Shimmer Wave for Search / Agent Skeleton */
+@keyframes sweepShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-sweep-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: sweepShimmer 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
